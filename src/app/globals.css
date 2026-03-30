@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --eco-primary: #059669;
+  --eco-secondary: #10b981;
+  --eco-accent: #34d399;
+  --eco-light: #ecfdf5;
+  --eco-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --earth-brown: #92400e;
+  --sky-blue: #0ea5e9;
+  --leaf-green: #16a34a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --eco-light: #1e293b;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom eco-friendly animations */
+@keyframes leaf-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes eco-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes carbon-reduce {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
+.leaf-float {
+  animation: leaf-float 3s ease-in-out infinite;
+}
+
+.eco-pulse {
+  animation: eco-pulse 2s ease-in-out infinite;
+}
+
+.carbon-reduce {
+  animation: carbon-reduce 2s ease-out forwards;
+}
+
+/* Custom eco gradient backgrounds */
+.eco-gradient-bg {
+  background: var(--eco-gradient);
+}
+
+.earth-gradient-bg {
+  background: linear-gradient(135deg, #f59e0b 0%, #92400e 50%, #16a34a 100%);
+}
+
+.sky-gradient-bg {
+  background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+}
+
+/* Custom scrollbar for eco theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--eco-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--eco-secondary);
+}
+
+/* Eco-friendly button styles */
+.btn-eco {
+  @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105;
+}
+
+.btn-eco-outline {
+  @apply border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+}
+
+/* Card hover effects */
+.eco-card {
+  @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+}
+
+/* Eco-friendly input styling */
+.input-eco {
+  @apply border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 rounded-lg px-3 py-2 transition-all duration-200;
+}
+
+/* Progress bar eco styling */
+.progress-eco {
+  @apply bg-gray-200 rounded-full overflow-hidden;
+}
+
+.progress-eco-fill {
+  @apply bg-gradient-to-r from-green-400 to-emerald-500 h-full transition-all duration-500 ease-out;
+}
+
+/* Floating elements for visual interest */
+.floating-element {
+  animation: leaf-float 4s ease-in-out infinite;
+}
+
+.floating-element:nth-child(2n) {
+  animation-delay: -1s;
+}
+
+.floating-element:nth-child(3n) {
+  animation-delay: -2s;
+}
+
+/* Loading spinner eco style */
+.spinner-eco {
+  @apply border-4 border-green-200 border-t-green-600 rounded-full animate-spin;
+}
