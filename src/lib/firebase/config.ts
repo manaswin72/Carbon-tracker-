@@ -26,11 +26,25 @@ export const firebaseEnabled = requiredEnvKeys.every((key) => {
   return typeof value === 'string' && value.trim().length > 0;
 });
 
-// IMPORTANT: Avoid initializing Firebase at import-time when env vars are missing.
-// This prevents the entire Next app from crashing with `auth/invalid-api-key`.
-export const app = firebaseEnabled
-  ? initializeApp(firebaseConfig)
-  : null;
+// IMPORTANT:
+// - Avoid initializing Firebase when env vars are missing.
+// - Also guard against "invalid config" scenarios on CI/Vercel where env vars
+//   may exist but be incorrect/placeholder, which can otherwise crash the build.
+let app = null as ReturnType<typeof initializeApp> | null;
+let auth = null as ReturnType<typeof getAuth> | null;
+let db = null as ReturnType<typeof getFirestore> | null;
 
-export const auth = app ? getAuth(app) : null;
-export const db = app ? getFirestore(app) : null;
+if (firebaseEnabled) {
+  try {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+  } catch (err) {
+    console.error('[firebase] initialization failed; disabling firebase client:', err);
+    app = null;
+    auth = null;
+    db = null;
+  }
+}
+
+export { app, auth, db };
