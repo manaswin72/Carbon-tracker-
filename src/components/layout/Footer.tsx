@@ -22,7 +22,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-gray-900 mb-2">Connect</h4>
             <ul className="space-y-1 text-sm text-gray-600">
-              <li><a href="https://github.com/Eshaan-byte/Carbon-Tracker" target="_blank" className="hover:text-green-600">GitHub</a></li>
+              <li><a href="btc.in" target="_blank" className="hover:text-green-600">GitHub</a></li>
               <li><a href="#" className="hover:text-green-600">Report Issue</a></li>
             </ul>
           </div>
